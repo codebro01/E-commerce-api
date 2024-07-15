@@ -19,9 +19,9 @@ import populate from '../populate.js';
         // if(role === 'buyer') throw new UnauthenticatedError('Switch to seller before seeing all products');
         const {userID, username} = req.user;
         req.body.createdBy = userID;
-        // const product = await Product.create(req.body);
-        await Product.deleteMany({});
-        const product = await Product.insertMany(populate);
+        const product = await Product.create(req.body);
+        // await Product.deleteMany({});
+        // const product = await Product.insertMany(populate);
         res.status(StatusCodes.CREATED).json({Message: `Product successfully uploaded`, product: product});
     }
     
