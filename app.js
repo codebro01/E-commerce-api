@@ -37,7 +37,7 @@ app.use('/api/v1/orders',authMiddleware, orderRouter)
 app.use(notFound);
 app.use(customErrorHandler);
 
-const PORT = 3500;
+const PORT = process.env.PORT || 3500;
 
 const start = async () => {
   try {
