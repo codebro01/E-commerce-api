@@ -3,6 +3,6 @@ import {getAllStoreProducts, queryProducts} from '../controllers/storeController
 const router = express.Router();
 
  router.route('/').get(getAllStoreProducts)
- router.route('/search').get(queryProducts);
+ router.route('/query').get(queryProducts);
 
  export default router;
