@@ -25,7 +25,6 @@ const loginUser = async (req, res) => {
     const pwdIsCorrect = await user.comparePwd(password);
     if(!pwdIsCorrect) throw new UnauthenticatedError("Invalid credentials");
     const token = user.createJWT()
-    console.log(req.headers.authorization);
     res.status(StatusCodes.ACCEPTED).json({user: {username: user.username,email: user.email}, token: token});
 }
 
