@@ -1,0 +1,225 @@
+openapi: 3.0.0
+info:
+  title: e-commerce api
+  description: This is a basic e-commerce api where clients can either be a buyer or seller by switching roles through the click of a button sending a patch request from the frontend. I made this so basic for any dev to improve on so as to suit whatever they will be willing to use it for, thanks for checking on this project. Happy coding.
+  contact:
+    name: codebro
+    url: ''
+    email: iamcodebro@gmail.com
+  version: '1.0'
+servers:
+- url: https://e-commerce-api-rrcx.onrender.com/api/v1
+  variables: {}
+paths:
+  /store:
+    get:
+      tags:
+      - Store
+      summary: all store products
+      description: This route provides all the products in the store, its available to clients who wish to buy or sell
+      operationId: allstoreproducts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /store/query:
+    get:
+      tags:
+      - Store
+      summary: query store products
+      operationId: querystoreproducts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: login user
+      description: Here, already registered users can login
+      operationId: loginuser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/loginuserrequest'
+              - example:
+                  username: codebro
+                  password: '@Codebro123'
+            example:
+              username: codebro
+              password: '@Codebro123'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      summary: register user
+      description: Through this route, anyone can register to become a user of the ecommerce store. when they register by default they become a buyer, they would have to switch roles to become a seller to perform sellers related actions such as creating products, updating products etc.
+      operationId: registeruser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /products:
+    post:
+      tags:
+      - Products
+      summary: create product
+      operationId: createproduct
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+      - Products
+      summary: get all user products
+      operationId: getalluserproducts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /products/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The user ID
+    get:
+      tags:
+      - Products
+      summary: get  user single product
+      operationId: getusersingleproduct
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    patch:
+      tags:
+      - Products
+      summary: update user product
+      operationId: updateuserproduct
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+      - Products
+      summary: delete user product
+      operationId: deleteuserproduct
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /role/buyer:
+    patch:
+      tags:
+      - Role
+      summary: patch role(buyer)
+      operationId: patchrole(buyer)
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /role/seller:
+    patch:
+      tags:
+      - Role
+      summary: patch role(seller)
+      operationId: patchrole(seller)
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /orders:
+    get:
+      tags:
+      - Orders
+      summary: get all orders
+      operationId: getallorders
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+      - Orders
+      summary: post orders
+      operationId: postorders
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    loginuserrequest:
+      title: loginuserrequest
+      required:
+      - username
+      - password
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      example:
+        username: codebro
+        password: '@Codebro123'
+  securitySchemes:
+    httpBearer:
+      type: http
+      scheme: bearer
+security:
+- httpBearer: []
+tags:
+- name: Store
+  description: ''
+- name: Auth
+  description: ''
+- name: Products
+  description: ''
+- name: Role
+  description: ''
+- name: Orders
+  description: ''

@@ -23,9 +23,10 @@ const createProduct = async (req, res) => {
     const role = user[0].role
     if (role === 'buyer') throw new unAuthenticatedError('Switch to seller before seeing all products');
     req.body.createdBy = userID;
-    const product = await Product.create(req.body);
+    console.log(userID);
     // await Product.deleteMany({});
-    // const product = await Product.insertMany(populate);
+    // const product = await Product.insertMany(req.body);
+    const product = await Product.create(req.body);
     res.status(StatusCodes.CREATED).json({ Message: `Product successfully uploaded`, product: product });
 }
 

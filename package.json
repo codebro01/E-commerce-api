@@ -25,6 +25,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.5",
     "rate-limiter": "^0.2.0",
-    "xss-clean": "^0.1.4"
+    "swagger-ui-express": "^5.0.1",
+    "xss-clean": "^0.1.4",
+    "yamljs": "^0.3.0"
   }
 }
