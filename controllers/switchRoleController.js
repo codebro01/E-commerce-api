@@ -12,7 +12,7 @@ const buyer = async (req, res) => {
 
     const switchRole = await User.findOneAndUpdate({_id: userID}, {role: 'buyer'}, {runValidators: true, new: true});
     
-    res.status(StatusCodes.OK).json({switchRole})
+    res.status(StatusCodes.OK).json({username: switchRole.username, newRole: switchRole.role})
 }
 //! switch to seller here
 const seller = async (req, res) => {
@@ -24,7 +24,7 @@ const seller = async (req, res) => {
 
         const switchRole = await User.findOneAndUpdate({_id: userID}, {role: 'seller'}, {runValidators: true, new: true});
         
-        res.status(StatusCodes.OK).json({switchRole})
+        res.status(StatusCodes.OK).json({username: switchRole.username, newRole: switchRole.role})
 
 }
 
