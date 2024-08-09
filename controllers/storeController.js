@@ -2,7 +2,8 @@ import Product from '../models/products.js'
 import { StatusCodes } from 'http-status-codes';
 import { notFoundError, badRequestError} from '../errors/index.js';
 const getAllStoreProducts =  (req, res) => {
-
+    console.log(req.ip);
+    
     Product.find({})
     .then(data => {
         res.status(StatusCodes.OK).json({products: data})
