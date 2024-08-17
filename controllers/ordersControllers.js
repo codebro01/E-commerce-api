@@ -4,7 +4,7 @@ import User from '../models/users.js'
 import { unAuthenticatedError, badRequestError, notFoundError } from '../errors/index.js';
 
 const createOrders = async (req, res) => {
-    const {userID, username} = req.user;
+    const {userID} = req.user;
     const user = await User.find({_id: userID});
     const role = user[0].role
     if(role === 'seller') throw new unAuthenticatedError('You are not a buyer');

@@ -9,8 +9,8 @@ const sendVerificationToken = ({currentUser, emailVerificationToken}) => {
             port: 587,
             secure: false,
             auth: {
-                user: process.env.NODEMAILER_USER_EMAIL,
-                pass: process.env.NODEMAILER_USER_PASS
+                user: process.env.NODEMAILER_USER_EMAIL, // gmail
+                pass: process.env.NODEMAILER_USER_PASS // gmail passkey
             },
         });
 

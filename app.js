@@ -1,6 +1,6 @@
-import dotenv from 'dotenv';
+import dotenv from 'dotenv/config';
+// dotenv.config();
 import 'express-async-errors';
-dotenv.config();
 import cors from 'cors';
 import { rateLimit } from 'express-rate-limit';
 import express from 'express';
@@ -19,7 +19,7 @@ import reviewRouter from './routes/review.js';
 import userRouter from './routes/users.js';
 import notFound from './middlewares/notFoundMIddleware.js';
 import customErrorHandler from './middlewares/errorMiddleware.js';
-import {authMiddleware} from './middlewares/authMiddleware.js';
+import { authMiddleware } from './middlewares/authMiddleware.js';
 import checkRole from './middlewares/checkRoleMiddleware.js';
 
 // import corsOptions from './middlewares/corsOptions.js';
@@ -33,17 +33,23 @@ const swaggerDoc = YAML.load('./swagger.yaml')
 
 //? Extra security packages
 app.use(cors());
-app.use(helmet());
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'"],
+    scriptSrc: ["'self'", "https://cdn.jsdelivr.net", "'unsafe-inline'"],
+  },
+}))
 app.use(rateLimit({
- windowMs:60 * 1000, 
-    max: 60
+  windowMs: 60 * 1000,
+  max: 60
 }))
 
 //! Middlewares 
+app.use(express.static('./view'))
 app.use(express.json());
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser(process.env.JWT_SECRET));
-app.get('/', (req, res)=> {
+app.get('/', (req, res) => {
   res.send(`<h1>Welcome to my E-commerce API 
     <br>
     <p style = font-weight: 800;>Click <a href = '/api-docs'>Documentation </a> to go to API documentation</p>
@@ -51,13 +57,14 @@ app.get('/', (req, res)=> {
 })
 
 
+
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc));
 app.use('/api/v1/auth', authRouter)
-app.use('/api/v1/products',authMiddleware, productsRouter);
-app.use('/api/v1/role',authMiddleware, switchRole);
+app.use('/api/v1/products', authMiddleware, productsRouter);
+app.use('/api/v1/role', authMiddleware, switchRole);
 app.use('/api/v1/store', storeRouter);
 app.use('/api/v1/review', reviewRouter);
-app.use('/api/v1/orders',authMiddleware, orderRouter)
+app.use('/api/v1/orders', orderRouter)
 app.use('/api/v1/users', userRouter)
 
 app.use(notFound);
@@ -69,11 +76,11 @@ const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
     app.listen(PORT, () => console.log(`App is listening at port: ${PORT}`))
-}
-catch (err) {
+  }
+  catch (err) {
     console.log('There was an error in the Connection:' + err)
+  }
 }
-  } 
 
 start();
 

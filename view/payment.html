@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stripe Checkout Integration Test</title>
+</head>
+<body>
+
+    <!-- Use this form if you dont wanna use axios.js to post data -->
+    <!-- <form action="/api/v1/orders/payment" method="post">
+        <h3 class="form-heading">checkout form</h3>
+        <div class="input-field">
+            <label for="Product name">Product name</label>
+            <input type="text" name="name" id="name" required>
+        </div>
+        <div class="input-field">
+            <label for="Description"> Description</label>
+            <input type="text" name="description" id="description" required>
+        </div>
+        <div class="input-field">
+            <label for="Amount">Amount</label>
+            <input type="text" name="amount" id="amount" required>
+        </div>
+        <div class="input-field">
+            <label for="Quantity">Quantity</label>
+            <input type="text" name="quantity" id="quantity" required>
+        </div>
+        <input type="submit" id="submit"></button>
+    </form> -->
+
+    <!-- use this for axios -->
+    <form id="form">
+        <h3 class="form-heading">checkout form</h3>
+        <div class="input-field">
+            <label for="Product name">Product name</label>
+            <input type="text" id="name" required>
+        </div>
+        <div class="input-field">
+            <label for="Description"> Description</label>
+            <input type="text" id="description" required>
+        </div>
+        <div class="input-field">
+            <label for="Amount">Amount</label>
+            <input type="text"  id="amount" required>
+        </div>
+        <div class="input-field">
+            <label for="Quantity">Quantity</label>
+            <input type="text"  id="quantity" required>
+        </div>
+        <input type="submit" id="submit"></button>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.7.3/dist/axios.min.js"></script>  
+     <script src="./payment.js"></script>
+</body>
+</html>
